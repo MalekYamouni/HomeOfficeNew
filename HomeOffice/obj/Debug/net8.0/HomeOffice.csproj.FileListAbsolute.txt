@@ -146,3 +146,4 @@ D:\Users\Malek\Desktop\Arbeit\HomeOffice\HomeOffice\bin\Debug\net8.0\Microsoft.I
 D:\Users\Malek\Desktop\Arbeit\HomeOffice\HomeOffice\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\Users\Malek\Desktop\Arbeit\HomeOffice\HomeOffice\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 d:\Users\Malek\Desktop\Arbeit\HomeOffice\HomeOffice\bin\Debug\net8.0\BCrypt.Net-Next.dll
+D:\Users\Malek\Desktop\Arbeit\HomeOffice\HomeOffice\obj\Debug\net8.0\HomeOffice.sourcelink.json

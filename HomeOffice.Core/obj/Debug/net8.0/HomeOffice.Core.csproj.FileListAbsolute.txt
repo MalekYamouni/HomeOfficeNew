@@ -9,3 +9,4 @@ D:\Users\Malek\Desktop\Arbeit\HomeOffice\HomeOffice.Core\obj\Debug\net8.0\HomeOf
 D:\Users\Malek\Desktop\Arbeit\HomeOffice\HomeOffice.Core\obj\Debug\net8.0\refint\HomeOffice.Core.dll
 D:\Users\Malek\Desktop\Arbeit\HomeOffice\HomeOffice.Core\obj\Debug\net8.0\HomeOffice.Core.pdb
 D:\Users\Malek\Desktop\Arbeit\HomeOffice\HomeOffice.Core\obj\Debug\net8.0\ref\HomeOffice.Core.dll
+D:\Users\Malek\Desktop\Arbeit\HomeOffice\HomeOffice.Core\obj\Debug\net8.0\HomeOffice.Core.sourcelink.json
