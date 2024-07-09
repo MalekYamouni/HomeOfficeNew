@@ -11,11 +11,11 @@ export class TimeService {
 
   constructor(private _http: HttpClient) {}
 
-  startTime(userId: number): Observable<any>{
-    return this._http.post<any>(`${this.apiUrl}/start`, { userId });
+  startTime(): Observable<any> {
+    return this._http.post<any>(`${this.apiUrl}/start`, {});
   }
 
-  stopTime(userId: number) : Observable<any> {
-    return this._http.post<any>(`${this.apiUrl}/stop`, { userId });
+  stopTime(): Observable<any> {
+    return this._http.post<any>(`${this.apiUrl}/stop`, {});
   }
 }

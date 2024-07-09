@@ -63,15 +63,15 @@ namespace HomeOffice
         public void ConfigureServices(IServiceCollection services)
         {
 #if DEBUG
-			services.AddLogging(options =>
-			{
-				options.AddSimpleConsole(opts => opts.IncludeScopes = false);
-			});
+            services.AddLogging(options =>
+            {
+                options.AddSimpleConsole(opts => opts.IncludeScopes = false);
+            });
 #endif
 
             // Die Datenbank mithilfe von AddDbContext hinzufügen/registrieren
-             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppDbContext>(options =>
+               options.UseSqlite(_configuration.GetConnectionString("DefaultConnection")));
 
             services.AddCors(options =>
             {
@@ -85,24 +85,13 @@ namespace HomeOffice
 
             services.AddControllers();
 
-            #region Token
-            // Mithilfe von Tokens die eingegebenen Daten authentifizieren
-        //     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        //     .AddJwtBearer(options =>
-        //     {
-        //         options.TokenValidationParameters = new TokenValidationParameters
-        //         {
-        //             ValidateIssuer = true,
-        //             ValidateAudience = true,
-        //             ValidateLifetime = true,
-        //             ValidateIssuerSigningKey = true,
-        //             ValidIssuer = "yourIssuer",
-        //             ValidAudience = "yourAudience",
-        //             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("yourSecretKey"))
-        //         };
-        //     });
-        // services.AddAuthorization();
-            #endregion Token
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Sitzungstimeout
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -110,6 +99,8 @@ namespace HomeOffice
                 options.MinimumSameSitePolicy = SameSiteMode.None;
                 options.Secure = CookieSecurePolicy.Always;
             });
+
+            services.AddControllersWithViews();
 
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 
@@ -124,10 +115,10 @@ namespace HomeOffice
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 #if DEBUG
-			services.AddSwaggerGen(c =>
-			{
-				c.SwaggerDoc("v1", new OpenApiInfo { Title = "HomeOffice", Version = "v1" });
-			});
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "HomeOffice", Version = "v1" });
+            });
 #endif
         }
 
@@ -145,7 +136,7 @@ namespace HomeOffice
             {
                 app.UseDefaultFiles()
                    .UseStaticFiles();
-                   
+
             }
 
             if (_env.IsDevelopment())
@@ -202,30 +193,30 @@ namespace HomeOffice
                 .UseDefaultFiles()
                 .UseStaticFiles();
 
-            
+
 
             // 1. SourcePath: gibt den Pfad zur Root der Angular-Anwendung an. In diesem Fall ist dies ../LearnWebApps.Client. Zeile 173
             // 2. UseProxyToSpaDevelopmentServer: leitet Anfragen an den Angular Entwicklungsserver weiter, der standardmäßig auf http://localhost:4200 läuft. Zeile 175
             // Spa = Single Page Application
 #if DEBUG
-			app.Use(async (ctx, next) =>
-			{
-				try
-				{
-					await next();
-				}
-				catch (System.Net.Http.HttpRequestException)
-				{
-					// läuft Angular nicht dann wird swagger geöffnet
-					ctx.Response.Redirect("/swagger/index.html");
-				}
-			}).UseSpa(spa =>
-			{
+            app.Use(async (ctx, next) =>
+            {
+                try
+                {
+                    await next();
+                }
+                catch (System.Net.Http.HttpRequestException)
+                {
+                    // läuft Angular nicht dann wird swagger geöffnet
+                    ctx.Response.Redirect("/swagger/index.html");
+                }
+            }).UseSpa(spa =>
+            {
                 // 1.
-				spa.Options.SourcePath = "../LearnWebApps.Client";
+                spa.Options.SourcePath = "../LearnWebApps.Client";
                 // 2.
-				spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
-			});
+                spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+            });
 #endif
 
         }

@@ -12,13 +12,13 @@ export class TimeComponent {
   userId: number = 1;
 
   public StartTime() {
-    this.timeService.startTime(this.userId).subscribe(
+    this.timeService.startTime().subscribe(
       (response) => {
         console.log('Zeit gestartet', response);
       },
       (error : HttpErrorResponse) => {
         console.error('Fehler beim Starten: ', error);
-        if ( error.status == 400){
+        if ( error.status == 400 ||  error.status ==500){
           console.error("Details", error.error);
         }
       }
@@ -26,7 +26,7 @@ export class TimeComponent {
   }
 
   public StopTime() {
-    this.timeService.stopTime(this.userId).subscribe(
+    this.timeService.stopTime().subscribe(
       (response) => {
         console.log('Zeit wurde gestoppt und abgespeichert', response);
       },

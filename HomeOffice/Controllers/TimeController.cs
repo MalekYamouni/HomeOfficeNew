@@ -11,19 +11,19 @@ public class TimeController : Controller
 {
     private readonly AppDbContext _context;
 
+    // Beispiel ID
+    int userId = 1;
     public TimeController(AppDbContext context)
     {
         _context = context;
+
     }
 
     [HttpPost("start")]
     public IActionResult StartTime()
     {
-        // User von der Session getten
-        // HttpContext.Session.SetInt32("userId", userId);
 
         var date = DateTime.Now.Date;
-        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
         var existingEntry = _context.Time.FirstOrDefault(e => e.Userid == userId && e.Date == date);
 
         // überprüfen ob der User existiert
@@ -46,7 +46,7 @@ public class TimeController : Controller
         _context.SaveChanges();
 
         // startZeit speichern
-        HttpContext.Session.SetString($"startTime_{userId}", DateTime.Now.ToString());
+        // HttpContext.Session.SetString($"startTime_{userId}", DateTime.Now.ToString());
 
         return Ok(new { Message = "Zeit wird aufgenommen" });
     }
@@ -54,31 +54,31 @@ public class TimeController : Controller
     [HttpPost("stop")]
     public IActionResult StopTime()
     {
-        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
         var date = DateTime.Now.Date;
 
         var existingEntry = _context.Time
             .FirstOrDefault(t => t.Userid == userId && t.Date == date);
+        var user = _context.Users.FirstOrDefault(u => u.Id == userId);
 
-        var startTimeStr = HttpContext.Session.GetString($"startTime_{userId}");
-        var startTime = DateTime.Parse(startTimeStr);
-        var duration = DateTime.Now.Subtract(startTime).TotalMinutes;
+        // var startTimeStr = HttpContext.Session.GetString($"startTime_{userId}");
+        // var startTime = DateTime.Parse(startTimeStr);
+        // var duration = DateTime.Now.Subtract(startTime).TotalMinutes;
 
-        if (string.IsNullOrEmpty(startTimeStr))
-        {
-            return BadRequest(new { Message = "Zeitaufnahme wurde noch nicht gestartet" });
+        // if (string.IsNullOrEmpty(startTimeStr))
+        // {
+        //     return BadRequest(new { Message = "Zeitaufnahme wurde noch nicht gestartet" });
 
-        }
+        // }
 
-        if (existingEntry != null)
-        {
-            existingEntry.TotalMinutes += (int)duration;
+        // if (existingEntry != null)
+        // {
+        //     existingEntry.TotalMinutes += (int)duration;
 
-            // änderung abspeichern
-            _context.SaveChanges();
+        //     // änderung abspeichern
+        //     _context.SaveChanges();
 
-        }
+        // }
 
-        return Ok(new { Message = "Zeitaufnahme beendet", TotalMinutes = existingEntry.TotalMinutes });
+        return Ok(new { Message = $"Zeitaufnahme beendet vom User : {user.Username}", TotalMinutes = existingEntry.TotalMinutes });
     }
 }
