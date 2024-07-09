@@ -19,6 +19,8 @@ using HomeOffice.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using HomeOffice.Controllers;
+
 
 
 
@@ -85,21 +87,6 @@ namespace HomeOffice
 
             services.AddControllers();
 
-            services.AddDistributedMemoryCache();
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(30); // Sitzungstimeout
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-            });
-
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-                options.Secure = CookieSecurePolicy.Always;
-            });
-
             services.AddControllersWithViews();
 
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
@@ -112,7 +99,8 @@ namespace HomeOffice
                           options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
                       });
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<ITimeService, TimeService>();
 
 #if DEBUG
             services.AddSwaggerGen(c =>

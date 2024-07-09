@@ -6,6 +6,7 @@ using HomeOffice.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
+
 namespace HomeOffice.Controllers
 {
     [ApiController]
@@ -14,9 +15,9 @@ namespace HomeOffice.Controllers
     public class AuthController : ControllerBase
     {
 
+        private UserService _userService = new UserService();
         // Instanz vom DbContext erstellen
         private readonly AppDbContext _context;
-
         // zuweisen
         public AuthController(AppDbContext context)
         {
@@ -34,7 +35,8 @@ namespace HomeOffice.Controllers
             }
 
             // neues Passwort anlegen 
-            if (user.Password == ""){
+            if (user.Password == "")
+            {
                 login.Password = PasswordHasher.HashPassword(login.Password);
                 user.Password = login.Password;
                 _context.SaveChanges();
@@ -44,10 +46,10 @@ namespace HomeOffice.Controllers
 
             if (user != null && !isPasswordValid)
             {
-                HttpContext.Session.SetInt32("userId", user.Id);
                 return Unauthorized(new { Message = "Benutzername oder Passwort ungültig" });
             }
-
+            
+            _userService.userId = user.Id;
             return Ok(new { Message = $"Login war erfolgreich mit dem User: {user.Username} und der Id: {user.Id}" });
         }
     }

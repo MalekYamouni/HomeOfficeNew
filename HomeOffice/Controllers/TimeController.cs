@@ -6,30 +6,27 @@ using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.Routing;
 using SQLitePCL;
+using HomeOffice.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class TimeController : Controller
 {
     private readonly AppDbContext _context;
-
-    // Beispiel ID
-    int userId = 1;
-    Stopwatch sw = new Stopwatch();
+    public UserService _userService = new UserService();
+    public TimeService _timerService = new TimeService();
+    public int userId;
 
     public TimeController(AppDbContext context)
     {
         _context = context;
-
+        userId = _userService.userId;
     }
 
     [HttpPost("start")]
     public IActionResult StartTime()
     {
-        sw.Start();
-        Thread.Sleep(2000);
-        sw.Stop();
-        TimeSpan stopwatchElapsed = sw.Elapsed;
+        _timerService.Start();
         var date = DateTime.Now.Date;
         var existingEntry = _context.Time.FirstOrDefault(e => e.Userid == userId && e.Date == date);
 
@@ -50,17 +47,14 @@ public class TimeController : Controller
             _context.Time.Add(newEntry);
             _context.SaveChanges();
         }
-        _context.SaveChanges();
-
-        // startZeit speichern
-        // HttpContext.Session.SetString($"startTime_{userId}", DateTime.Now.ToString());
-
-        return Ok(new { Message = $"Zeit wird aufgenommen Dauer : {stopwatchElapsed.TotalSeconds}" });
+        return Ok(new { Message = $"Zeit wird aufgenommen" });
     }
 
     [HttpPost("stop")]
     public IActionResult StopTime()
     {
+        _timerService.Stop();
+        int duration = _timerService.GetElapsedMinutes();
         var date = DateTime.Now.Date;
         var existingEntry = _context.Time
             .FirstOrDefault(t => t.Userid == userId && t.Date == date);
@@ -85,6 +79,6 @@ public class TimeController : Controller
 
         // }
 
-        return Ok(new { Message = $"Zeitaufnahme beendet vom User : {user.Username}", TotalMinutes = existingEntry.TotalMinutes });
+        return Ok(new { Message = $"Zeitaufnahme beendet vom User : {user.Username} Dauer : {duration} ", TotalMinutes = existingEntry.TotalMinutes });
     }
 }
