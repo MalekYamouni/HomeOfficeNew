@@ -1,9 +1,11 @@
 using HomeOffice.Data;
 using HomeOffice.Core;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.Routing;
+using SQLitePCL;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -13,6 +15,8 @@ public class TimeController : Controller
 
     // Beispiel ID
     int userId = 1;
+    Stopwatch sw = new Stopwatch();
+
     public TimeController(AppDbContext context)
     {
         _context = context;
@@ -22,7 +26,10 @@ public class TimeController : Controller
     [HttpPost("start")]
     public IActionResult StartTime()
     {
-
+        sw.Start();
+        Thread.Sleep(2000);
+        sw.Stop();
+        TimeSpan stopwatchElapsed = sw.Elapsed;
         var date = DateTime.Now.Date;
         var existingEntry = _context.Time.FirstOrDefault(e => e.Userid == userId && e.Date == date);
 
@@ -48,14 +55,13 @@ public class TimeController : Controller
         // startZeit speichern
         // HttpContext.Session.SetString($"startTime_{userId}", DateTime.Now.ToString());
 
-        return Ok(new { Message = "Zeit wird aufgenommen" });
+        return Ok(new { Message = $"Zeit wird aufgenommen Dauer : {stopwatchElapsed.TotalSeconds}" });
     }
 
     [HttpPost("stop")]
     public IActionResult StopTime()
     {
         var date = DateTime.Now.Date;
-
         var existingEntry = _context.Time
             .FirstOrDefault(t => t.Userid == userId && t.Date == date);
         var user = _context.Users.FirstOrDefault(u => u.Id == userId);
