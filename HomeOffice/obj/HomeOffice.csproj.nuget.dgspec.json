@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice\\HomeOffice.csproj": {}
+    "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice\\HomeOffice.csproj": {}
   },
   "projects": {
     "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Core\\HomeOffice.Core.csproj": {
@@ -63,14 +63,14 @@
         }
       }
     },
-    "d:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Data\\HomeOffice.Data.csproj": {
+    "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Data\\HomeOffice.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Data\\HomeOffice.Data.csproj",
+        "projectUniqueName": "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Data\\HomeOffice.Data.csproj",
         "projectName": "HomeOffice.Data",
-        "projectPath": "d:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Data\\HomeOffice.Data.csproj",
+        "projectPath": "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Data\\HomeOffice.Data.csproj",
         "packagesPath": "C:\\Users\\Malek\\.nuget\\packages\\",
-        "outputPath": "d:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Data\\obj\\",
+        "outputPath": "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -138,14 +138,14 @@
         }
       }
     },
-    "d:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice\\HomeOffice.csproj": {
+    "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice\\HomeOffice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice\\HomeOffice.csproj",
+        "projectUniqueName": "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice\\HomeOffice.csproj",
         "projectName": "HomeOffice",
-        "projectPath": "d:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice\\HomeOffice.csproj",
+        "projectPath": "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice\\HomeOffice.csproj",
         "packagesPath": "C:\\Users\\Malek\\.nuget\\packages\\",
-        "outputPath": "d:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice\\obj\\",
+        "outputPath": "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -169,8 +169,8 @@
               "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Core\\HomeOffice.Core.csproj": {
                 "projectPath": "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Core\\HomeOffice.Core.csproj"
               },
-              "d:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Data\\HomeOffice.Data.csproj": {
-                "projectPath": "d:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Data\\HomeOffice.Data.csproj"
+              "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Data\\HomeOffice.Data.csproj": {
+                "projectPath": "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOffice\\HomeOffice.Data\\HomeOffice.Data.csproj"
               }
             }
           }

@@ -7,6 +7,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.Routing;
 using SQLitePCL;
 using HomeOffice.Controllers;
+using HomeOffice.Services;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -17,10 +18,12 @@ public class TimeController : Controller
     public TimeService _timerService = new TimeService();
     public int userId;
 
-    public TimeController(AppDbContext context)
+    public TimeController(AppDbContext context, TimeService timerService)
     {
         _context = context;
-        userId = _userService.userId;
+        // userId = _userService.userId; FOREIGN KEY CONSTRAINT FEHLER
+        userId = 1;
+        _timerService = timerService;
     }
 
     [HttpPost("start")]

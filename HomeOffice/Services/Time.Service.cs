@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace HomeOffice.Controllers
+namespace HomeOffice.Services
 {
     public class TimeService : ITimeService
     {
