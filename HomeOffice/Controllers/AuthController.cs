@@ -33,6 +33,7 @@ namespace HomeOffice.Controllers
                 return Unauthorized(new { Message = "Benutzername oder Passwort ungültig" });
             }
 
+            // neues Passwort anlegen 
             if (user.Password == ""){
                 login.Password = PasswordHasher.HashPassword(login.Password);
                 user.Password = login.Password;
@@ -40,12 +41,14 @@ namespace HomeOffice.Controllers
             }
 
             bool isPasswordValid = PasswordHasher.VerifyPassword(login.Password, user.Password);
+
             if (user != null && !isPasswordValid)
             {
+                HttpContext.Session.SetInt32("userId", user.Id);
                 return Unauthorized(new { Message = "Benutzername oder Passwort ungültig" });
             }
 
-            return Ok(new { Message = "Login war erfolgreich" });
+            return Ok(new { Message = $"Login war erfolgreich mit dem User: {user.Username} und der Id: {user.Id}" });
         }
     }
 
