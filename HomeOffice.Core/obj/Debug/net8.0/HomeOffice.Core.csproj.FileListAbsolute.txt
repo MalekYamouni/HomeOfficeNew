@@ -10,3 +10,15 @@ D:\Users\Malek\Desktop\Arbeit\HomeOffice\HomeOffice.Core\obj\Debug\net8.0\refint
 D:\Users\Malek\Desktop\Arbeit\HomeOffice\HomeOffice.Core\obj\Debug\net8.0\HomeOffice.Core.pdb
 D:\Users\Malek\Desktop\Arbeit\HomeOffice\HomeOffice.Core\obj\Debug\net8.0\ref\HomeOffice.Core.dll
 D:\Users\Malek\Desktop\Arbeit\HomeOffice\HomeOffice.Core\obj\Debug\net8.0\HomeOffice.Core.sourcelink.json
+D:\Users\Malek\Desktop\HomeOfficeNew\HomeOfficeNew\HomeOffice.Core\bin\Debug\net8.0\HomeOffice.Core.deps.json
+D:\Users\Malek\Desktop\HomeOfficeNew\HomeOfficeNew\HomeOffice.Core\bin\Debug\net8.0\HomeOffice.Core.dll
+D:\Users\Malek\Desktop\HomeOfficeNew\HomeOfficeNew\HomeOffice.Core\bin\Debug\net8.0\HomeOffice.Core.pdb
+D:\Users\Malek\Desktop\HomeOfficeNew\HomeOfficeNew\HomeOffice.Core\obj\Debug\net8.0\HomeOffice.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\Malek\Desktop\HomeOfficeNew\HomeOfficeNew\HomeOffice.Core\obj\Debug\net8.0\HomeOffice.Core.AssemblyInfoInputs.cache
+D:\Users\Malek\Desktop\HomeOfficeNew\HomeOfficeNew\HomeOffice.Core\obj\Debug\net8.0\HomeOffice.Core.AssemblyInfo.cs
+D:\Users\Malek\Desktop\HomeOfficeNew\HomeOfficeNew\HomeOffice.Core\obj\Debug\net8.0\HomeOffice.Core.csproj.CoreCompileInputs.cache
+D:\Users\Malek\Desktop\HomeOfficeNew\HomeOfficeNew\HomeOffice.Core\obj\Debug\net8.0\HomeOffice.Core.sourcelink.json
+D:\Users\Malek\Desktop\HomeOfficeNew\HomeOfficeNew\HomeOffice.Core\obj\Debug\net8.0\HomeOffice.Core.dll
+D:\Users\Malek\Desktop\HomeOfficeNew\HomeOfficeNew\HomeOffice.Core\obj\Debug\net8.0\refint\HomeOffice.Core.dll
+D:\Users\Malek\Desktop\HomeOfficeNew\HomeOfficeNew\HomeOffice.Core\obj\Debug\net8.0\HomeOffice.Core.pdb
+D:\Users\Malek\Desktop\HomeOfficeNew\HomeOfficeNew\HomeOffice.Core\obj\Debug\net8.0\ref\HomeOffice.Core.dll

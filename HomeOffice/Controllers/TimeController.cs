@@ -14,22 +14,21 @@ using HomeOffice.Services;
 public class TimeController : Controller
 {
     private readonly AppDbContext _context;
-    public UserService _userService = new UserService();
-    public TimeService _timerService = new TimeService();
+    public IUserService _userService;
+    public ITimeService _timeService;
     public int userId;
 
-    public TimeController(AppDbContext context, TimeService timerService)
+    public TimeController(AppDbContext context, ITimeService timeService)
     {
         _context = context;
-        // userId = _userService.userId; FOREIGN KEY CONSTRAINT FEHLER
         userId = 1;
-        _timerService = timerService;
+        _timeService = timeService;
     }
 
     [HttpPost("start")]
     public IActionResult StartTime()
     {
-        _timerService.Start();
+        _timeService.Start();
         var date = DateTime.Now.Date;
         var existingEntry = _context.Time.FirstOrDefault(e => e.Userid == userId && e.Date == date);
 
@@ -56,32 +55,22 @@ public class TimeController : Controller
     [HttpPost("stop")]
     public IActionResult StopTime()
     {
-        _timerService.Stop();
-        int duration = _timerService.GetElapsedMinutes();
+        _timeService.Stop();
+        int duration = _timeService.GetElapsedMinutes();
         var date = DateTime.Now.Date;
         var existingEntry = _context.Time
             .FirstOrDefault(t => t.Userid == userId && t.Date == date);
         var user = _context.Users.FirstOrDefault(u => u.Id == userId);
 
-        // var startTimeStr = HttpContext.Session.GetString($"startTime_{userId}");
-        // var startTime = DateTime.Parse(startTimeStr);
-        // var duration = DateTime.Now.Subtract(startTime).TotalMinutes;
+        if (existingEntry != null)
+        {
+            existingEntry.TotalMinutes += (int)duration;
 
-        // if (string.IsNullOrEmpty(startTimeStr))
-        // {
-        //     return BadRequest(new { Message = "Zeitaufnahme wurde noch nicht gestartet" });
+            // änderung abspeichern
+            _context.SaveChanges();
+            duration = 0;
 
-        // }
-
-        // if (existingEntry != null)
-        // {
-        //     existingEntry.TotalMinutes += (int)duration;
-
-        //     // änderung abspeichern
-        //     _context.SaveChanges();
-
-        // }
-
+        }
         return Ok(new { Message = $"Zeitaufnahme beendet vom User : {user.Username} Dauer : {duration} ", TotalMinutes = existingEntry.TotalMinutes });
     }
 }
