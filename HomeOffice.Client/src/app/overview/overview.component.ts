@@ -4,7 +4,7 @@ import { getDaysInMonth, startOfMonth, addDays, startOfWeek, endOfWeek, isSameMo
 @Component({
   selector: 'app-calendar',
   templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.css']
+  styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
 
