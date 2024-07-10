@@ -6,10 +6,10 @@ import { getDaysInMonth, startOfMonth, addDays, startOfWeek, endOfWeek, isSameMo
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.css']
 })
-export class CalendarComponent implements OnInit {
+export class OverviewComponent implements OnInit {
 
-  currentMonth: Date;
-  calendarDays: Date[][];
+  public currentMonth!: Date;
+  public calendarDays!: Date[][];
 
   constructor() { }
 
@@ -45,5 +45,7 @@ export class CalendarComponent implements OnInit {
     this.currentMonth = subMonths(this.currentMonth, 1);
     this.generateCalendar();
   }
-
+  isSameMonth(date: Date, month: Date): boolean {
+    return isSameMonth(date, month);
+  }
 }
