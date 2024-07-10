@@ -15,13 +15,14 @@ namespace HomeOffice.Controllers
     public class AuthController : ControllerBase
     {
 
-        private UserService _userService = new UserService();
+        private IUserService _userService;
         // Instanz vom DbContext erstellen
         private readonly AppDbContext _context;
         // zuweisen
-        public AuthController(AppDbContext context)
+        public AuthController(AppDbContext context, IUserService userService)
         {
             _context = context;
+            _userService = userService;
         }
 
         [HttpPost("login")]
@@ -50,7 +51,7 @@ namespace HomeOffice.Controllers
             }
             
             _userService.userId = user.Id;
-            return Ok(new { Message = $"Login war erfolgreich mit dem User: {user.Username} und der Id: {user.Id}" });
+            return Ok(new { Message = $"Login war erfolgreich mit dem User: {user.Username} und der Id: {_userService.userId}" });
         }
     }
 

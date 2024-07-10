@@ -2556,11 +2556,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\Malek\\Desktop\\HomeOfficeNew\\HomeOfficeNew\\HomeOffice.Data\\HomeOffice.Data.csproj",
+      "projectUniqueName": "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOfficeNew\\HomeOffice.Data\\HomeOffice.Data.csproj",
       "projectName": "HomeOffice.Data",
-      "projectPath": "D:\\Users\\Malek\\Desktop\\HomeOfficeNew\\HomeOfficeNew\\HomeOffice.Data\\HomeOffice.Data.csproj",
+      "projectPath": "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOfficeNew\\HomeOffice.Data\\HomeOffice.Data.csproj",
       "packagesPath": "C:\\Users\\Malek\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\Malek\\Desktop\\HomeOfficeNew\\HomeOfficeNew\\HomeOffice.Data\\obj\\",
+      "outputPath": "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOfficeNew\\HomeOffice.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2581,8 +2581,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Users\\Malek\\Desktop\\HomeOfficeNew\\HomeOfficeNew\\HomeOffice.Core\\HomeOffice.Core.csproj": {
-              "projectPath": "D:\\Users\\Malek\\Desktop\\HomeOfficeNew\\HomeOfficeNew\\HomeOffice.Core\\HomeOffice.Core.csproj"
+            "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOfficeNew\\HomeOffice.Core\\HomeOffice.Core.csproj": {
+              "projectPath": "D:\\Users\\Malek\\Desktop\\Arbeit\\HomeOfficeNew\\HomeOffice.Core\\HomeOffice.Core.csproj"
             }
           }
         }

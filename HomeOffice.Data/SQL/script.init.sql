@@ -1,4 +1,4 @@
-DROP TABLE Users;
+DROP TABLE Time;
 
 CREATE TABLE
     IF NOT EXISTS Users (
@@ -25,3 +25,7 @@ CREATE TABLE
         TotalMinutes INTEGER NOT NULL DEFAULT 0,
         FOREIGN KEY (UserId) REFERENCES Users (Id)
     );
+
+UPDATE Time
+SET TotalMinutes = 0
+WHERE Id = 1;

@@ -18,10 +18,11 @@ public class TimeController : Controller
     public ITimeService _timeService;
     public int userId;
 
-    public TimeController(AppDbContext context, ITimeService timeService)
+    public TimeController(AppDbContext context, ITimeService timeService, IUserService userService)
     {
         _context = context;
-        userId = 1;
+        // userId = 1;
+        _userService = userService;
         _timeService = timeService;
     }
 
@@ -30,10 +31,10 @@ public class TimeController : Controller
     {
         _timeService.Start();
         var date = DateTime.Now.Date;
-        var existingEntry = _context.Time.FirstOrDefault(e => e.Userid == userId && e.Date == date);
+        var existingEntry = _context.Time.FirstOrDefault(e => e.Userid == _userService.userId && e.Date == date);
 
         // überprüfen ob der User existiert
-        if (userId == null)
+        if (_userService.userId == null)
         {
             return NotFound(new { Message = "User nicht gefunden" });
         }
@@ -42,7 +43,7 @@ public class TimeController : Controller
         {
             var newEntry = new HomeOfficeTimeModel
             {
-                Userid = userId,
+                Userid = _userService.userId,
                 Date = date,
                 TotalMinutes = 0
             };
@@ -59,18 +60,15 @@ public class TimeController : Controller
         int duration = _timeService.GetElapsedMinutes();
         var date = DateTime.Now.Date;
         var existingEntry = _context.Time
-            .FirstOrDefault(t => t.Userid == userId && t.Date == date);
-        var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            .FirstOrDefault(t => t.Userid == _userService.userId && t.Date == date);
+        var user = _context.Users.FirstOrDefault(u => u.Id == _userService.userId);
 
         if (existingEntry != null)
         {
             existingEntry.TotalMinutes += (int)duration;
-
-            // änderung abspeichern
             _context.SaveChanges();
-            duration = 0;
-
         }
-        return Ok(new { Message = $"Zeitaufnahme beendet vom User : {user.Username} Dauer : {duration} ", TotalMinutes = existingEntry.TotalMinutes });
+        duration = 0;
+        return Ok(new { Message = $"Zeitaufnahme beendet vom User : {user.Username}", TotalMinutes = existingEntry.TotalMinutes });
     }
 }
