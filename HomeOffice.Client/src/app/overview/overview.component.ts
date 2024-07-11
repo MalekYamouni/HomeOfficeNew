@@ -21,26 +21,44 @@ import { DataService } from '../services/data.service';
 export class OverviewComponent implements OnInit {
   public currentMonth!: Date;
   public calendarDays!: Date[][];
-  public userId : number | undefined;
+  public userId = 1;
   selectedDayData: any;
+  entries: any[] = [];
+  selectedDate: string | null = null;
+  totalMinutes: number | null = null;
+  errorMessage: string | null = null;
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.currentMonth = new Date();
     this.generateCalendar();
-    
+    this.selectedDate = new Date().toISOString().split('T')[0];
   }
 
-  showDayDetails(day: Date): void {
-    // const formattedDate = format(day, 'yyyy-MM-dd');
-    this.dataService.getHomeOfficeData().subscribe(
+  onDateChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement && inputElement.value) {
+      this.selectedDate = inputElement.value;
+      this.getTimeEntries();
+    }
+  }
+
+  getTimeEntries(): void {
+    this.dataService.getTimeEntriesByDate(this.selectedDate).subscribe(
       (data) => {
-        this.selectedDayData = data;
-        console.log('Daten für Tag:', day, data);
+        if (data && data.length > 0) {
+          this.totalMinutes = data[0].TotalMinutes;
+          this.errorMessage = null;
+        } else {
+          this.totalMinutes = null;
+          this.errorMessage = 'Keine Einträge gefunden';
+        }
       },
       (error) => {
-        console.error('Fehler beim Laden der Daten:', error);
+        this.totalMinutes = null;
+        this.errorMessage = 'Fehler beim Abrufen der Zeit-Einträge';
+        console.error('Fehler beim Abrufen der Zeit-Einträge', error);
       }
     );
   }

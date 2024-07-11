@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let week of calendarDays">
-        <td *ngFor="let day of week" (click)="showDayDetails(day)">
+        <td *ngFor="let day of week" >
           <div [class.disabled]="!isSameMonth(day, currentMonth)" class="calendar-day">{{day.getDate()}}</div>
         </td>
       </tr>
@@ -21,5 +21,17 @@
 
 <div *ngIf="selectedDayData">
   <h3>HomeOffice-Daten für den {{ selectedDayData.date }}</h3>
-  <p>Geleistete Stunden: {{ selectedDayData.hours }}</p>
+  <p>Geleistete Stunden: {{ selectedDayData.TotalMinutes }}</p>
+</div>
+
+<div>
+  <input type="date" [(ngModel)]="selectedDate" (change)="onDateChange($event)">
+  <button (click)="getTimeEntries()">Get Time Entries</button>
+</div>
+
+<div *ngIf="totalMinutes !== null">
+  <p>Total Minutes: {{ totalMinutes }}</p>
+</div>
+<div *ngIf="errorMessage">
+  <p>{{ errorMessage }}</p>
 </div>

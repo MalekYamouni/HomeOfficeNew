@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HomeOffice.Data;
 using Microsoft.EntityFrameworkCore;
+using HomeOffice.Core;
+using System.Security.Claims;
 
 namespace HomeOffice.Controllers
 {
@@ -10,24 +12,33 @@ namespace HomeOffice.Controllers
     public class DetailsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IUserService _user;
 
-        public DetailsController(AppDbContext context)
+        public DetailsController(AppDbContext context, IUserService user)
         {
             _context = context;
+            _user = user;
         }
-
-        [HttpGet("userId/{userId}")]
-        public IActionResult GetHomeOfficeData(int userId)
+        
+        [HttpGet("getByDate")]
+        public IActionResult GetByDate(DateTime date)
         {
-            // var data = await _context.Time
-            //     .FirstOrDefaultAsync(t => t.Userid == userId );
+            var entries = _context.Time
+                .Where(t => t.Userid == _user.userId && t.Date == date)
+                .Select(t => new
+                {
+                    t.Date,
+                    t.TotalMinutes
+                })
+                .ToList();
 
-            var data = _context.Time.FirstOrDefault(t=> t.UserId == userId);
-            // if (data == null)
-            // {
-            //     return NotFound(new { message = "No data found for this day" });
-            // }
-            return Ok(data);
+            if (!entries.Any())
+            {
+                return NotFound(new { Message = "Keine Einträge gefunden" });
+            }
+
+            return Ok(entries);
         }
     }
 }
+

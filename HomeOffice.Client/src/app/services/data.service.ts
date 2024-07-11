@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -6,13 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = 'https://localhost:5001/api/details'
+  private apiUrl = 'http://localhost:5001/api/details'
 
   constructor(private _http : HttpClient) { }
 
-  getHomeOfficeData(): Observable<any> {
-    const userId = 1;
-    const url = `${this.apiUrl}/userid/${userId}`;
-    return this._http.get<any>(url);
+  getTimeEntriesByDate(date: string): Observable<any> {
+    let params = new HttpParams().set('date', date);
+    return this._http.get<any>(`${this.apiUrl}/getByDate`, { params });
   }
 }
