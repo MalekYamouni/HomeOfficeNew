@@ -21,7 +21,6 @@ public class TimeController : Controller
     public TimeController(AppDbContext context, ITimeService timeService, IUserService userService)
     {
         _context = context;
-        // userId = 1;
         _userService = userService;
         _timeService = timeService;
     }

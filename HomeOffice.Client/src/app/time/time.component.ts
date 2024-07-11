@@ -9,7 +9,8 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 })
 export class TimeComponent {
   constructor(private timeService: TimeService) {}
-  userId: number = 1;
+
+  // userId: number = 1;
 
   public StartTime() {
     this.timeService.startTime().subscribe(

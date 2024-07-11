@@ -16,7 +16,6 @@ export class LoginComponent {
   constructor(private loginservice: LoginService, private router: Router) {}
 
   // Hier den Benutzernamen überprüfen
-  // Passwort auch überprüfen existiert aber noch nicht
   public login() {
     this.loginservice.easylogin(this.username, this.password).subscribe(
       (response) => {
@@ -29,6 +28,5 @@ export class LoginComponent {
         console.error('Login fehlgeschlagen', error);
       }
     );
-    //test
   }
 }

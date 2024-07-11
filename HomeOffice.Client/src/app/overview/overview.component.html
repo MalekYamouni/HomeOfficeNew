@@ -11,10 +11,15 @@
     </thead>
     <tbody>
       <tr *ngFor="let week of calendarDays">
-        <td *ngFor="let day of week">
-          <div [class.disabled]="!isSameMonth(day, currentMonth)" class="calendar-day">{{ day | date: 'd' }}</div>
+        <td *ngFor="let day of week" (click)="showDayDetails(day)">
+          <div [class.disabled]="!isSameMonth(day, currentMonth)" class="calendar-day">{{day.getDate()}}</div>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<div *ngIf="selectedDayData">
+  <h3>HomeOffice-Daten für den {{ selectedDayData.date }}</h3>
+  <p>Geleistete Stunden: {{ selectedDayData.hours }}</p>
 </div>
