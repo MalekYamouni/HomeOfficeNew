@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Time } from '../Interfaces/ITime';
 import { Observable } from 'rxjs';
 
 @Injectable({

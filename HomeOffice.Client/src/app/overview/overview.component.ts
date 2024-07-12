@@ -12,6 +12,8 @@ import {
   endOfMonth,
 } from 'date-fns';
 import { DataService } from '../services/data.service';
+import { Observable } from 'rxjs';
+import { OfficeTime } from '../Interfaces/ITime';
 
 @Component({
   selector: 'app-calendar',
@@ -19,80 +21,92 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent implements OnInit {
-  public currentMonth!: Date;
-  public calendarDays!: Date[][];
-  public userId = 1;
-  selectedDayData: any;
-  entries: any[] = [];
-  selectedDate: string | null = null;
-  totalMinutes: number | null = null;
-  errorMessage: string | null = null;
+  // public currentMonth!: Date;
+  // public calendarDays!: Date[][];
+  // public userId = 1;
+  // selectedDayData: any;
+  // entries: any[] = [];
+  // selectedDate: string | null = null;
+  // totalMinutes: number | null = null;
+  // errorMessage: string | null = null;
+
+  public user: OfficeTime[];
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.currentMonth = new Date();
-    this.generateCalendar();
-    this.selectedDate = new Date().toISOString().split('T')[0];
+    // this.currentMonth = new Date();
+    // this.generateCalendar();
+    // this.selectedDate = new Date().toISOString().split('T')[0];
+    this.getUserId();
   }
 
-  onDateChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    if (inputElement && inputElement.value) {
-      this.selectedDate = inputElement.value;
-      this.getTimeEntries();
-    }
-  }
-
-  getTimeEntries(): void {
-    this.dataService.getTimeEntriesByDate(this.selectedDate).subscribe(
-      (data) => {
-        if (data && data.length > 0) {
-          this.totalMinutes = data[0].TotalMinutes;
-          this.errorMessage = null;
-        } else {
-          this.totalMinutes = null;
-          this.errorMessage = 'Keine Einträge gefunden';
-        }
-      },
+  getUserId() {
+    this.dataService.getAll().subscribe((data: OfficeTime[]) => {
+      this.user = data;
+    }),
       (error) => {
-        this.totalMinutes = null;
-        this.errorMessage = 'Fehler beim Abrufen der Zeit-Einträge';
-        console.error('Fehler beim Abrufen der Zeit-Einträge', error);
-      }
-    );
+        console.error('Error fetching', error);
+      };
   }
 
-  generateCalendar(): void {
-    const daysInMonth = getDaysInMonth(this.currentMonth);
-    const startOfMonthDate = startOfMonth(this.currentMonth);
-    const endOfMonthDate = addDays(endOfWeek(endOfMonth(this.currentMonth)), 1); // Korrektur hier
+  // onDateChange(event: Event): void {
+  //   const inputElement = event.target as HTMLInputElement;
+  //   if (inputElement && inputElement.value) {
+  //     this.selectedDate = inputElement.value;
+  //     this.getTimeEntries();
+  //   }
+  // }
 
-    let currentDate = startOfWeek(startOfMonthDate);
-    const days: Date[] = [];
+  // getTimeEntries(): void {
+  //   this.dataService.getTimeEntriesByDate(this.selectedDate).subscribe(
+  //     (data) => {
+  //       if (data && data.length > 0) {
+  //         this.totalMinutes = data[0].TotalMinutes;
+  //         this.errorMessage = null;
+  //       } else {
+  //         this.totalMinutes = null;
+  //         this.errorMessage = 'Keine Einträge gefunden';
+  //       }
+  //     },
+  //     (error) => {
+  //       this.totalMinutes = null;
+  //       this.errorMessage = 'Fehler beim Abrufen der Zeit-Einträge';
+  //       console.error('Fehler beim Abrufen der Zeit-Einträge', error);
+  //     }
+  //   );
+  // }
 
-    while (currentDate < endOfMonthDate) {
-      days.push(currentDate);
-      currentDate = addDays(currentDate, 1);
-    }
+  // generateCalendar(): void {
+  //   const daysInMonth = getDaysInMonth(this.currentMonth);
+  //   const startOfMonthDate = startOfMonth(this.currentMonth);
+  //   const endOfMonthDate = addDays(endOfWeek(endOfMonth(this.currentMonth)), 1); // Korrektur hier
 
-    this.calendarDays = [];
-    for (let i = 0; i < Math.ceil(days.length / 7); i++) {
-      this.calendarDays.push(days.slice(i * 7, (i + 1) * 7));
-    }
-  }
+  //   let currentDate = startOfWeek(startOfMonthDate);
+  //   const days: Date[] = [];
 
-  nextMonth(): void {
-    this.currentMonth = addMonths(this.currentMonth, 1);
-    this.generateCalendar();
-  }
+  //   while (currentDate < endOfMonthDate) {
+  //     days.push(currentDate);
+  //     currentDate = addDays(currentDate, 1);
+  //   }
 
-  previousMonth(): void {
-    this.currentMonth = subMonths(this.currentMonth, 1);
-    this.generateCalendar();
-  }
+  //   this.calendarDays = [];
+  //   for (let i = 0; i < Math.ceil(days.length / 7); i++) {
+  //     this.calendarDays.push(days.slice(i * 7, (i + 1) * 7));
+  //   }
+  // }
 
-  isSameMonth(date: Date, month: Date): boolean {
-    return isSameMonth(date, month);
-  }
+  // nextMonth(): void {
+  //   this.currentMonth = addMonths(this.currentMonth, 1);
+  //   this.generateCalendar();
+  // }
+
+  // previousMonth(): void {
+  //   this.currentMonth = subMonths(this.currentMonth, 1);
+  //   this.generateCalendar();
+  // }
+
+  // isSameMonth(date: Date, month: Date): boolean {
+  //   return isSameMonth(date, month);
+  // }
 }

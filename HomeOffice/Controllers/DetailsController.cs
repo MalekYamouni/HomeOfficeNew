@@ -19,26 +19,33 @@ namespace HomeOffice.Controllers
             _context = context;
             _user = user;
         }
-        
-        [HttpGet("getByDate")]
-        public IActionResult GetByDate(DateTime date)
+
+        [HttpGet("getAll")]
+        public ActionResult<IEnumerable<HomeOfficeTimeModel>> GetData()
         {
-            var entries = _context.Time
-                .Where(t => t.Userid == _user.userId && t.Date == date)
-                .Select(t => new
-                {
-                    t.Date,
-                    t.TotalMinutes
-                })
-                .ToList();
-
-            if (!entries.Any())
-            {
-                return NotFound(new { Message = "Keine Einträge gefunden" });
-            }
-
-            return Ok(entries);
+            var data = _context.Time.ToList();
+            return Ok(data);
         }
+        // [HttpGet("getByDate")]
+        // public IActionResult GetByDate(DateTime date)
+        // {
+        //     var entries = _context.Time
+        //         .Where(t => t.Userid == _user.userId && t.Date == date)
+        //         .Select(t => new
+        //         {
+        //             t.Date,
+        //             t.TotalMinutes
+        //         })
+        //         .ToList();
+
+        //     if (!entries.Any())
+        //     {
+        //         return NotFound(new { Message = "Keine Einträge gefunden" });
+        //     }
+
+        //     return Ok(entries);
+        // }
     }
 }
+
 

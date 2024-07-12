@@ -1,4 +1,4 @@
-export interface Time {
+export interface OfficeTime {
     Id : number
     UserId : number
     Date : Date

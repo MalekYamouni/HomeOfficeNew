@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <h2>{{ currentMonth | date: 'MMMM yyyy' }}</h2>
   <button (click)="previousMonth()">Previous</button>
   <button (click)="nextMonth()">Next</button>
@@ -17,9 +17,9 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
 
-<div *ngIf="selectedDayData">
+<!-- <div *ngIf="selectedDayData">
   <h3>HomeOffice-Daten für den {{ selectedDayData.date }}</h3>
   <p>Geleistete Stunden: {{ selectedDayData.TotalMinutes }}</p>
 </div>
@@ -34,4 +34,11 @@
 </div>
 <div *ngIf="errorMessage">
   <p>{{ errorMessage }}</p>
+</div> -->
+<div>
+  <button (click)="getUserId()">ClickMe</button>
+  <div *ngFor="let data of user">
+    <h5>{{data.Date | date}}</h5>
+    <h5>{{data.UserId}}</h5>
+  </div>
 </div>
