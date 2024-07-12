@@ -1,4 +1,4 @@
-<!-- <div>
+<div>
   <h2>{{ currentMonth | date: 'MMMM yyyy' }}</h2>
   <button (click)="previousMonth()">Previous</button>
   <button (click)="nextMonth()">Next</button>
@@ -11,34 +11,27 @@
     </thead>
     <tbody>
       <tr *ngFor="let week of calendarDays">
-        <td *ngFor="let day of week" >
+        <td *ngFor="let day of week">
           <div [class.disabled]="!isSameMonth(day, currentMonth)" class="calendar-day">{{day.getDate()}}</div>
         </td>
       </tr>
     </tbody>
   </table>
-</div> -->
-
-<!-- <div *ngIf="selectedDayData">
-  <h3>HomeOffice-Daten für den {{ selectedDayData.date }}</h3>
-  <p>Geleistete Stunden: {{ selectedDayData.TotalMinutes }}</p>
 </div>
 
 <div>
   <input type="date" [(ngModel)]="selectedDate" (change)="onDateChange($event)">
-  <button (click)="getTimeEntries()">Get Time Entries</button>
+  <button (click)="showSpecific()">Show Specific Data</button>
 </div>
 
-<div *ngIf="totalMinutes !== null">
-  <p>Total Minutes: {{ totalMinutes }}</p>
-</div>
-<div *ngIf="errorMessage">
-  <p>{{ errorMessage }}</p>
-</div> -->
-<div>
-  <button (click)="getUserId()">ClickMe</button>
-  <div *ngFor="let data of user">
-    <h5>{{data.Date | date}}</h5>
-    <h5>{{data.UserId}}</h5>
-  </div>
+<div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<div *ngIf="selectedDayData && selectedDayData.length > 0">
+  <h3>Zeiteinträge {{ selectedDate | date:'dd.MM.YYYY'}}</h3>
+  <ul>
+    <li *ngFor="let entry of selectedDayData">
+      <p>Datum: {{ entry.date | date:'dd.MM.YYYY'}}</p>
+      <p>Zeit in Minuten: {{ entry.totalMinutes }}</p>
+    </li>
+  </ul>
 </div>

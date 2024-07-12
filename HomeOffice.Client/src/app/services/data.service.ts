@@ -13,10 +13,6 @@ export class DataService {
 
   constructor(private _http: HttpClient) {}
 
-  // getTimeEntriesByDate(date: string): Observable<any> {
-  //   let params = new HttpParams().set('date', date);
-  //   return this._http.get<any>(`${this.apiUrl}/getByDate`, { params });
-  // }
   public getAll() : Observable<OfficeTime[]> {
     return this._http.get<OfficeTime[]>(`${this.apiUrl}/getAll`);
   }

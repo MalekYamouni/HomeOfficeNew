@@ -1,6 +1,6 @@
 export interface OfficeTime {
-    Id : number
-    UserId : number
-    Date : Date
-    TotalMinutes : number
+    id : number;
+    userid : number;
+    date : string;
+    totalMinutes : number;
 }

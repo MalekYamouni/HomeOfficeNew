@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HomeOffice.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5535c372065000b70a3fdbfc085a5a7f42b74bca")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9915242fbbc624ba52e046375f329c69bc0951d4")]
 [assembly: System.Reflection.AssemblyProductAttribute("HomeOffice.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HomeOffice.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
